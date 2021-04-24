@@ -12,6 +12,7 @@ import {
     FormControl,
 } from "@material-ui/core";
 import { KeyboardArrowRight } from "@material-ui/icons";
+import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles({
     filed: {
@@ -23,14 +24,31 @@ const useStyle = makeStyles({
 
 export default function Create() {
     const classes = useStyle();
-
+    const routeHistory = useHistory();
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [category, setCategory] = useState("money");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target);
+        fetch("http://localhost:8000/notes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                body: JSON.stringify({
+                    title,
+                    details,
+                    category,
+                }),
+            },
+        })
+            .then((resposne) => {
+                console.log(resposne);
+                routeHistory.replace("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
