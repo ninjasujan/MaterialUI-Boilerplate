@@ -7,35 +7,46 @@ import {
     ListItemText,
     ListItemIcon,
     AppBar,
+    Toolbar,
 } from "@material-ui/core";
 import { AddOutlined, SubjectOutlined } from "@material-ui/icons";
 import React from "react";
 import { useHistory, useLocation } from "react-router";
+import { format } from "date-fns";
 
 const drawerWidth = 240;
 
-const useStyle = makeStyles({
-    page: {
-        background: "#f9f9f9",
-        width: "100%",
-        padding: 20,
-    },
-    drawer: {
-        width: drawerWidth,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    root: {
-        display: "flex",
-    },
-    layoutTitle: {
-        textAlign: "center",
-        padding: 10,
-    },
-    activeLink: {
-        backgroundColor: "#f4f4f4",
-    },
+const useStyle = makeStyles((theme) => {
+    return {
+        page: {
+            background: "#f9f9f9",
+            width: "100%",
+            padding: 20,
+        },
+        drawer: {
+            width: drawerWidth,
+        },
+        drawerPaper: {
+            width: drawerWidth,
+        },
+        root: {
+            display: "flex",
+        },
+        layoutTitle: {
+            textAlign: "center",
+            padding: 10,
+        },
+        activeLink: {
+            backgroundColor: "#f4f4f4",
+        },
+        appBar: {
+            width: `calc(100% - ${drawerWidth}px)`,
+        },
+        toolbar: theme.mixins.toolbar,
+        date: {
+            flexGrow: 1,
+        },
+    };
 });
 
 const Layout = (props) => {
@@ -57,6 +68,14 @@ const Layout = (props) => {
 
     return (
         <div className={classes.root}>
+            <AppBar className={classes.appBar} elevation={0}>
+                <Toolbar>
+                    <Typography className={classes.date}>
+                        {format(new Date(), "do MMMM Y")}
+                    </Typography>
+                    <Typography>Shaun Peiling</Typography>
+                </Toolbar>
+            </AppBar>
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
@@ -84,7 +103,10 @@ const Layout = (props) => {
                     ))}
                 </List>
             </Drawer>
-            <div className={classes.page}>{props.children}</div>
+            <div className={classes.page}>
+                <div className={classes.toolbar}></div>
+                {props.children}
+            </div>
         </div>
     );
 };
