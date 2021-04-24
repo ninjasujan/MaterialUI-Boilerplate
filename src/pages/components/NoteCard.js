@@ -6,13 +6,17 @@ import {
     IconButton,
     Typography,
     makeStyles,
+    Avatar,
 } from "@material-ui/core";
 import { DeleteOutlined } from "@material-ui/icons";
+import { blue, green, yellow } from "@material-ui/core/colors";
 
 const useStyle = makeStyles({
-    test: {
-        border: (note) => {
-            if (note.category == "work") return "1px solid red";
+    avatar: {
+        backgroundColor: (note) => {
+            if (note.category === "work") return yellow[700];
+            if (note.category === "todos") return blue[700];
+            if (note.category === "money") return green[700];
         },
     },
 });
@@ -23,6 +27,11 @@ const NoteCard = (props) => {
         <div>
             <Card elevation={2} classes={classes.border}>
                 <CardHeader
+                    avatar={
+                        <Avatar className={classes.avatar}>
+                            {props.note.category[0].toUpperCase()}
+                        </Avatar>
+                    }
                     action={
                         <IconButton
                             onClick={() =>

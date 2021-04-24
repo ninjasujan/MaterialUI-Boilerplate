@@ -8,6 +8,7 @@ import {
     ListItemIcon,
     AppBar,
     Toolbar,
+    Avatar,
 } from "@material-ui/core";
 import { AddOutlined, SubjectOutlined } from "@material-ui/icons";
 import React from "react";
@@ -46,6 +47,9 @@ const useStyle = makeStyles((theme) => {
         date: {
             flexGrow: 1,
         },
+        avatar: {
+            marginLeft: theme.spacing(2),
+        },
     };
 });
 
@@ -74,6 +78,7 @@ const Layout = (props) => {
                         {format(new Date(), "do MMMM Y")}
                     </Typography>
                     <Typography>Shaun Peiling</Typography>
+                    <Avatar className={classes.avatar} />
                 </Toolbar>
             </AppBar>
             <Drawer
