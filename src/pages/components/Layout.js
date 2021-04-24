@@ -6,6 +6,7 @@ import {
     ListItem,
     ListItemText,
     ListItemIcon,
+    AppBar,
 } from "@material-ui/core";
 import { AddOutlined, SubjectOutlined } from "@material-ui/icons";
 import React from "react";
@@ -17,6 +18,7 @@ const useStyle = makeStyles({
     page: {
         background: "#f9f9f9",
         width: "100%",
+        padding: 20,
     },
     drawer: {
         width: drawerWidth,
@@ -29,6 +31,7 @@ const useStyle = makeStyles({
     },
     layoutTitle: {
         textAlign: "center",
+        padding: 10,
     },
     activeLink: {
         backgroundColor: "#f4f4f4",
